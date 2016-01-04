@@ -24,7 +24,6 @@
  * THE SOFTWARE.
  *
  */
-
 (function() {
   var Dropzone, Emitter, camelize, contentLoaded, detectVerticalSquash, drawImageIOSFix, noop, without,
     __slice = [].slice,

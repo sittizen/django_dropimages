@@ -1,8 +1,21 @@
 {% load static %}
-<script>
-    if(typeof jQuery=='undefined') {
-        console.log("niente jq");
-    }
-</script>
-
+<link rel="stylesheet" href="{% static 'django_dropimages/css/dropzone.css' %}" />
 <script src="{% static 'django_dropimages/js/dropzone.js' %}"></script>
+<script>
+Dropzone.options.djangoDropimagesDropzone = {
+    parallelUploads: 1,
+    maxFilesize: 12,
+    acceptedFiles: "image/png,image/gif,image/jpg,image/jpeg",
+    addRemoveLinks: true,
+    dictDefaultMessage: "To upload drop here files, a directory or click.",
+    dictFileTooBig: "Shown when the file is too big. {{filesize}} and {{maxFilesize}} will be replaced.",
+    dictResponseError: "Shown as error message if the server response was invalid. {{statusCode}} will be replaced with the servers status code.",
+    dictInvalidFileType: "Shown as error message if the file doesn't match the file type.",
+    dictCancelUpload: "If addRemoveLinks is true, the text to be used for the cancel upload link.",
+    dictCancelUploadConfirmation: "If addRemoveLinks is true, the text to be used for confirmation when cancelling upload.",
+    dictRemoveFile: "remove",
+    init: function() {
+        this.on("removedfile", function(file) { console.log("ho rimosso il file "+ file); });
+    }
+};
+</script>
