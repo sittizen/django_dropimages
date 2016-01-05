@@ -1,0 +1,17 @@
+{% load drop_images %}
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js" type="application/javascript"></script>
+    {% drop_images_js %}
+</head>
+<body>
+    <form id="external-form" action="." method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input id="show-when-ready" type="submit" value="Submit" style="display: none;"/>
+    </form>
+    {% drop_images  %}
+</body>
+</html>

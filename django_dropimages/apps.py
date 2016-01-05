@@ -13,4 +13,3 @@ class DropImagesConfig(AppConfig):
     def ready(self):
         if di_settings.PATCH_SETTINGS:
             di_settings.patch_all()
-        di_settings.check_middleware()

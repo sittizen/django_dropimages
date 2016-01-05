@@ -9,6 +9,11 @@ from django.conf import settings
 
 CONFIG_DEFAULTS = {
     'DICT_DEFAULT_MESSAGE': 'To upload drop here files, a directory or click.',
+
+    'SHOW_ID_ON_COMPLETE': None,
+    'GALLERY_FIELD_ID': None,
+    'UPLOAD_URL': None,
+    'DELETE_URL': None,
 }
 
 USER_CONFIG = getattr(settings, 'DROP_IMAGES_CONFIG', {})
@@ -16,15 +21,11 @@ USER_CONFIG = getattr(settings, 'DROP_IMAGES_CONFIG', {})
 CONFIG = CONFIG_DEFAULTS.copy()
 CONFIG.update(USER_CONFIG)
 
-PATCH_SETTINGS = getattr(settings, 'DROP_IMAGES_PATCH_SETTINGS', settings.DEBUG)
+PATCH_SETTINGS = getattr(settings, 'DROP_IMAGES_PATCH_SETTINGS', True)
 
 
 # The following functions can monkey-patch settings automatically. Several
 # imports are placed inside functions to make it safe to import this module.
-
-def check_middleware():
-    pass
-
 
 def patch_root_urlconf():
     from django.conf.urls import include, url

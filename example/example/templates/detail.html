@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Detail</title>
+</head>
+<body>
+
+<p>
+    {{ object.title }}
+    <ul>
+    {% for image in object.dropimages_gallery.images.all %}
+        <li>{{ image.image.url }}</li>
+    {% endfor %}
+    </ul>
+</p>
+</body>
+</html>

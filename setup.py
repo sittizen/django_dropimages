@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='django-dropimages',
-    version='0.1',
+    version='0.1.2',
     description='Uses Dropzone.js and django-braces to simplify the upload of multiple images into a collection object.',
     long_description=open('README.md', encoding='utf-8').read(),
     author='Simone Cittadini',

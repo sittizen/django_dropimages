@@ -37,7 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'django_dropimages',
+
+    'example.app',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -105,5 +108,7 @@ MEDIA_ROOT = '/tmp'
 
 # Custom config
 DROP_IMAGES_CONFIG = {
+    'SHOW_ID_ON_COMPLETE': 'show-when-ready',
+    'GALLERY_FIELD_ID': 'id_dropimages_gallery',
     'DICT_DEFAULT_MESSAGE': 'To upload drop here files, a directory or click and browse.',
 }

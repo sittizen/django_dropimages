@@ -32,8 +32,10 @@
         xmlhttp.send();
     }
 
+    var gallery_pk = undefined;
+
     Dropzone.options.djangoDropimagesDropzone = {
-        url: function() { return "{% url 'djdropimages:upload' %}?gallery_id={{ gallery_id }}" },
+        url: function() { return "{{ upload_url }}?gallery_id={{ gallery_id }}" },
         parallelUploads: 1,
         maxFilesize: 12,
         acceptedFiles: "image/png,image/gif,image/jpg,image/jpeg",
@@ -47,7 +49,26 @@
         dictRemoveFile: "remove",
         init: function() {
             this.on("removedfile", function(file) {
-                loadXMLDoc("{% url 'djdropimages:delete' %}?gallery_id={{ gallery_id }}&original_filename="+file.name);
+                loadXMLDoc("{{ delete_url }}?gallery_id={{ gallery_id }}&original_filename="+file.name);
+            });
+            this.on("success", function(file, response) {
+                gallery_pk = response.gallery_pk;
+            });
+            this.on("queuecomplete", function() {
+                {% if id_to_show %}
+                    var obj_to_show = document.getElementById("{{ id_to_show }}");
+                    if (obj_to_show != undefined) {
+                        obj_to_show.style.display = "block";
+                    }
+                {% endif %}
+                {% if gallery_field_id %}
+                    var select_obj = document.getElementById("{{ gallery_field_id }}");
+                    if (select_obj != undefined){
+                        select_obj.options.length = 0;
+                        select_obj.options[select_obj.options.length] = new Option(gallery_pk, gallery_pk);
+                        select_obj.options[select_obj.options.length].selected = "1";
+                    }
+                {% endif %}
             });
         }
     };

@@ -12,7 +12,11 @@ class UploadView(CsrfExemptMixin, JSONResponseMixin, View):
         gallery, _ = DropimagesGallery.objects.get_or_create(gallery_identifier=request.GET['gallery_id'],
                                                              owner=owner)
         DropimagesImage.objects.create(gallery=gallery, image=image, original_filename=image._name)
-        return self.render_json_response({})
+        return self.render_json_response({
+            'gallery_identifier': request.GET['gallery_id'],
+            'gallery_pk': gallery.pk,
+            'file_name': image._name,
+        })
 
 
 class DeleteView(CsrfExemptMixin, JSONResponseMixin, View):
