@@ -1,17 +1,14 @@
 from __future__ import absolute_import, unicode_literals
-
-import warnings
 from importlib import import_module
 
 from django.conf import settings
-from django.utils import six
-from django.utils.module_loading import import_string
 
 # Always import this module as follows:
 # from django_dropimages import settings [as di_settings]
 
 
 CONFIG_DEFAULTS = {
+    'DICT_DEFAULT_MESSAGE': 'To upload drop here files, a directory or click.',
 }
 
 USER_CONFIG = getattr(settings, 'DROP_IMAGES_CONFIG', {})

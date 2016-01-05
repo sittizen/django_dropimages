@@ -20,7 +20,7 @@
                    document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
                }
                else if(xmlhttp.status == 400) {
-                  alert('There was an error 400')
+                   alert('There was an error 400')
                }
                else {
                    alert('something else other than 200 was returned')
@@ -33,12 +33,12 @@
     }
 
     Dropzone.options.djangoDropimagesDropzone = {
-        url: function(files) { return "{% url 'djdropimages:upload' %}?gallery_id={{ gallery_id }}" },
+        url: function() { return "{% url 'djdropimages:upload' %}?gallery_id={{ gallery_id }}" },
         parallelUploads: 1,
         maxFilesize: 12,
         acceptedFiles: "image/png,image/gif,image/jpg,image/jpeg",
         addRemoveLinks: true,
-        dictDefaultMessage: "To upload drop here files, a directory or click.",
+        dictDefaultMessage: "{{ dict_default_message }}",
         dictFileTooBig: "Shown when the file is too big. {{filesize}} and {{maxFilesize}} will be replaced.",
         dictResponseError: "Shown as error message if the server response was invalid. {{statusCode}} will be replaced with the servers status code.",
         dictInvalidFileType: "Shown as error message if the file doesn't match the file type.",

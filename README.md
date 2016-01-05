@@ -1,7 +1,6 @@
 # Django Dropimages #
 Uses [Dropzone.js](http://www.dropzonejs.com/) and [django-braces](https://github.com/brack3t/django-braces) to simplify the upload of multiple images into a collection object.
 
-! warning, this will become production code but it's still in its early development (code isn't packaged yet)
 
 ## Documentation
 Add 'django_dropimages' to the list of installed apps.
@@ -15,7 +14,19 @@ Each image file dropped into the dropzone will create a *DropimagesImage* model,
 Install from PyPI with `pip`:
 `pip install django-dropimages`
 
-## Examples
+## Configuration
+Provides a setting dictionary that you can add in your project’s settings module to customize its behavior.
+
+### DROP_IMAGES_CONFIG
+
+#### keys:
+
++ DICT_DEFAULT_MESSAGE
+
+    The message that gets displayed before any files are dropped.
+
+
+## Example
 To navigate the example page (assuming you use [virtualenvwrapper](https://pypi.python.org/pypi/virtualenvwrapper)) :
 
     mkvirtualenv django-dropimages
@@ -23,3 +34,4 @@ To navigate the example page (assuming you use [virtualenvwrapper](https://pypi.
     add2virtualenv .
     python example/manage.py migrate
     python example/manage.py runserver
+    

@@ -102,3 +102,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_ROOT = '/tmp'
+
+# Custom config
+DROP_IMAGES_CONFIG = {
+    'DICT_DEFAULT_MESSAGE': 'To upload drop here files, a directory or click and browse.',
+}
