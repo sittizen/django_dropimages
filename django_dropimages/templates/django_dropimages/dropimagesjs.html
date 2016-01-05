@@ -2,7 +2,38 @@
 <link rel="stylesheet" href="{% static 'django_dropimages/css/dropzone.css' %}" />
 <script src="{% static 'django_dropimages/js/dropzone.js' %}"></script>
 <script>
+// http://stackoverflow.com/questions/8567114/how-to-make-an-ajax-call-without-jquery
+function loadXMLDoc(url) {
+    var xmlhttp;
+
+    if (window.XMLHttpRequest) {
+        // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    } else {
+        // code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == XMLHttpRequest.DONE ) {
+           if(xmlhttp.status == 200){
+               document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+           }
+           else if(xmlhttp.status == 400) {
+              alert('There was an error 400')
+           }
+           else {
+               alert('something else other than 200 was returned')
+           }
+        }
+    };
+
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
+
 Dropzone.options.djangoDropimagesDropzone = {
+    url: function(files) { return "{% url 'djdropimages:upload' %}?gallery_id={{ gallery_id }}" },
     parallelUploads: 1,
     maxFilesize: 12,
     acceptedFiles: "image/png,image/gif,image/jpg,image/jpeg",
@@ -15,7 +46,11 @@ Dropzone.options.djangoDropimagesDropzone = {
     dictCancelUploadConfirmation: "If addRemoveLinks is true, the text to be used for confirmation when cancelling upload.",
     dictRemoveFile: "remove",
     init: function() {
-        this.on("removedfile", function(file) { console.log("ho rimosso il file "+ file); });
+        this.on("removedfile", function(file) {
+            url = "{% url 'djdropimages:delete' %}?gallery_id={{ gallery_id }}&original_filename="+file.name;
+            console.log(url);
+            loadXMLDoc(url);
+        });
     }
 };
 </script>

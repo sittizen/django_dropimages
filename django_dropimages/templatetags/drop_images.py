@@ -1,3 +1,5 @@
+import uuid
+
 from django import template
 from django.template import Context
 
@@ -12,7 +14,7 @@ def drop_images_js(parser, token):
 class DropImagesJSNode(template.Node):
     def render(self, context):
         t = template.loader.get_template('django_dropimages/dropimagesjs.html')
-        return t.render(Context({}))
+        return t.render(Context({'gallery_id': uuid.uuid4()}))
 
 
 @register.tag(name="drop_images")
