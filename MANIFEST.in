@@ -1,0 +1,4 @@
+include LICENSE
+include README.md
+recursive-include django_dropimages/static *
+recursive-include django_dropimages/templates *

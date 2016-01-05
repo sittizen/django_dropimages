@@ -5,14 +5,15 @@ Uses [Dropzone.js](http://www.dropzonejs.com/) and [django-braces](https://githu
 ## Documentation
 Add 'django_dropimages' to the list of installed apps.
 
-Add *{% load drop_images %}* at the start of the template, *{% drop_images_js %}* where the javascripts are loaded,
-and *{% drop_images  %}* where you want the dropzone to show.
+Add `{% load drop_images %}` at the start of the template, `{% drop_images_js %}` where the javascripts are loaded,
+and `{% drop_images  %}` where you want the dropzone to show.
 
-Each image file dropped into the dropzone will create a *DropimagesImage* model, contained in a *DropimagesGallery* unique for every dropzone instance.
+Each image file dropped into the dropzone will create a `DropimagesImage` model, contained in a `DropimagesGallery` unique for every dropzone instance.
 
 ## Installation
 Install from PyPI with `pip`:
-`pip install django-dropimages`
+
+`pip install --pre django-dropimages`
 
 ## Configuration
 Provides a setting dictionary that you can add in your project’s settings module to customize its behavior.
@@ -21,7 +22,7 @@ Provides a setting dictionary that you can add in your project’s settings modu
 
 #### keys:
 
-+ DICT_DEFAULT_MESSAGE
++ `DICT_DEFAULT_MESSAGE`
 
     The message that gets displayed before any files are dropped.
 
