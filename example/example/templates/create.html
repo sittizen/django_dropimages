@@ -7,6 +7,9 @@
     {% drop_images_js %}
 </head>
 <body>
+    <p>
+        Title ad dropdown comes from a ModelForm for a custom Gallery. In real production you'll keep the select hidden.
+    </p>
     <form id="external-form" action="." method="post">
         {% csrf_token %}
         {{ form }}

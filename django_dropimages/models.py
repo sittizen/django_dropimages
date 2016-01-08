@@ -9,6 +9,6 @@ class DropimagesGallery(models.Model):
 
 
 class DropimagesImage(models.Model):
-    gallery = models.ForeignKey('django_dropimages.DropimagesGallery', related_name='images')
+    dropimages_gallery = models.ForeignKey('django_dropimages.DropimagesGallery', related_name='images')
+    dropimages_original_filename = models.CharField(max_length=256)
     image = models.ImageField(upload_to='%y/%m/%d')
-    original_filename = models.CharField(max_length=256)

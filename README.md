@@ -2,18 +2,22 @@
 Uses [Dropzone.js](http://www.dropzonejs.com/) and [django-braces](https://github.com/brack3t/django-braces) to simplify the upload of multiple images into a collection object.
 
 
-## Documentation
-Add 'django_dropimages' to the list of installed apps.
-
-Add `{% load drop_images %}` at the start of the template, `{% drop_images_js %}` where the javascripts are loaded,
-and `{% drop_images  %}` where you want the dropzone to show.
-
-Each image file dropped into the dropzone will create a `DropimagesImage` model, contained in a `DropimagesGallery` unique for every dropzone instance.
-
 ## Installation
 Install from PyPI with `pip`:
 
 `pip install --pre django-dropimages`
+
+
+## Documentation
+Add 'django_dropimages' to the list of installed apps.
+
+Add `{% load drop_images %}` at the start of the template, `{% drop_images_js %}` where the javascripts are loaded, 
+and `{% drop_images  %}` where you want the dropzone to show.
+
+Each image file dropped into the dropzone will create a `DropimagesImage` model, contained in a `DropimagesGallery` 
+unique for every dropzone instance.
+You can customize in order to specify which model will hold the image instead of `DropimagesImage`, 
+or completely override the called urls and use your own logic.
 
 ## Configuration
 Provides a setting dictionary that you can add in your project’s settings module to customize its behavior.
@@ -25,12 +29,12 @@ Provides a setting dictionary that you can add in your project’s settings modu
 + `SHOW_ID_ON_COMPLETE`
 
     Specify a DOM node id which will be set to 'display: block' once all the files are processed, useful to integrate
-    the dropzone into another modelform (see the example).
+    the dropzone into another modelform or wizard (see the examples).
     
 + `GALLERY_FIELD_ID`
 
-    Specify the id of a select field to be filled with the `DropimagesGallery` Django pk once the upload is complete,
-    useful to integrate the dropzone into another modelform (see the example).
+    Specify the id of a select field to be filled with the `DropimagesGallery` Django instance pk once the upload is 
+    complete, useful to integrate the dropzone into another modelform or wizard (see the examples).
     
 + `UPLOAD_URL`
 
@@ -41,9 +45,20 @@ Provides a setting dictionary that you can add in your project’s settings modu
 + `DELETE_URL`
 
     Overrides the url to ask for immediate image removal from the dropzone, so you can use your own view.
-    Two optione are automatically appended to the url; `?gallery_id` which is the same for every file into the dropzone 
+    Two options are automatically appended to the url; `?gallery_id` which is the same for every file into the dropzone 
     but unique among different dropzone instances, and `original_filename` which should be saved into `DropimagesImage`
-    objects to identify them.
+    or whichever model you use to save images in order to identify them.
+    
++ `DROPIMAGE_MODEL`
+
+    Use the specified model ( must be a `appname.ModelName` string ) to save the uploaded images.
+    Model must have a ForeignKey to `dropimages.DropImagesGallery` called `dropimages_gallery` and a 
+    `dropimages_original_filename` `CharField`.
+
++ `DROPIMAGE_FIELD`
+
+    Save the image into the specified field name of the `DROPIMAGE_MODEL` model.
+
 
 + `DICT_DEFAULT_MESSAGE`
 
