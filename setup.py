@@ -2,11 +2,18 @@ from io import open
 
 from setuptools import find_packages, setup
 
+try:
+    import pypandoc
+    long_description = pypandoc.convert('README.md', 'rst')
+    print "README.md succesfully converted"
+except(IOError, ImportError):
+    long_description = open('README.md').read()
+
 setup(
     name='django-dropimages',
-    version='0.1.2',
+    version='0.1.3',
     description='Uses Dropzone.js and django-braces to simplify the upload of multiple images into a collection object.',
-    long_description=open('README.md', encoding='utf-8').read(),
+    long_description=long_description,
     author='Simone Cittadini',
     author_email='simone@sig-c.com',
     url='https://github.com/sittizen/django_dropimages',
