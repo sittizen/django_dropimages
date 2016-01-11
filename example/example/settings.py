@@ -111,4 +111,7 @@ DROP_IMAGES_CONFIG = {
     'SHOW_ID_ON_COMPLETE': 'show-when-ready',
     'GALLERY_FIELD_ID': 'id_dropimages_gallery',
     'DICT_DEFAULT_MESSAGE': 'To upload drop here files, a directory or click and browse.',
+    # uncomment below to load images into custom models
+    'DROPIMAGE_MODEL': 'app.SomeImageModel',
+    'DROPIMAGE_FIELD': 'my_image_field',
 }

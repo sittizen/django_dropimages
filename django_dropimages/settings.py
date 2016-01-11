@@ -6,7 +6,6 @@ from django.conf import settings
 # Always import this module as follows:
 # from django_dropimages import settings [as di_settings]
 
-
 CONFIG_DEFAULTS = {
     'DICT_DEFAULT_MESSAGE': 'To upload drop here files, a directory or click.',
 
@@ -14,6 +13,9 @@ CONFIG_DEFAULTS = {
     'GALLERY_FIELD_ID': None,
     'UPLOAD_URL': None,
     'DELETE_URL': None,
+
+    'DROPIMAGE_MODEL': None,
+    'DROPIMAGE_FIELD': None,
 }
 
 USER_CONFIG = getattr(settings, 'DROP_IMAGES_CONFIG', {})
@@ -26,6 +28,7 @@ PATCH_SETTINGS = getattr(settings, 'DROP_IMAGES_PATCH_SETTINGS', True)
 
 # The following functions can monkey-patch settings automatically. Several
 # imports are placed inside functions to make it safe to import this module.
+
 
 def patch_root_urlconf():
     from django.conf.urls import include, url

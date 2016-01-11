@@ -2,7 +2,10 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import View
 from braces.views import CsrfExemptMixin, JSONResponseMixin
 
-from .models import DropimagesGallery, DropimagesImage
+from django_dropimages import settings as di_settings
+from .models import DropimagesGallery
+
+from django.apps import apps
 
 
 class UploadView(CsrfExemptMixin, JSONResponseMixin, View):
@@ -11,8 +14,13 @@ class UploadView(CsrfExemptMixin, JSONResponseMixin, View):
         image = request.FILES['file']
         gallery, _ = DropimagesGallery.objects.get_or_create(gallery_identifier=request.GET['gallery_id'],
                                                              owner=owner)
-        DropimagesImage.objects.create(dropimages_gallery=gallery, dropimages_original_filename=image._name,
-                                       image=image)
+        image_klass = apps.get_model(di_settings.CONFIG['DROPIMAGE_MODEL'] or 'django_dropimages.DropimagesImage')
+        kwargs_dict = {
+            'dropimages_gallery': gallery,
+            'dropimages_original_filename': image._name,
+            di_settings.CONFIG['DROPIMAGE_FIELD'] or 'image': image
+        }
+        image_klass.objects.create(**kwargs_dict)
         return self.render_json_response({
             'gallery_identifier': request.GET['gallery_id'],
             'gallery_pk': gallery.pk,
@@ -24,7 +32,8 @@ class DeleteView(CsrfExemptMixin, JSONResponseMixin, View):
     def get(self, request, *args, **kwargs):
         owner = request.user if not request.user.is_anonymous() else None
         gallery = get_object_or_404(DropimagesGallery, gallery_identifier=request.GET['gallery_id'], owner=owner)
-        di = get_object_or_404(DropimagesImage, dropimages_gallery=gallery,
+        image_klass = apps.get_model(di_settings.CONFIG['DROPIMAGE_MODEL'] or 'django_dropimages.DropimagesImage')
+        di = get_object_or_404(image_klass, dropimages_gallery=gallery,
                                dropimages_original_filename=request.GET['original_filename'])
         di.delete()
         return self.render_json_response({})
