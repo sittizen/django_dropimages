@@ -23,8 +23,6 @@ USER_CONFIG = getattr(settings, 'DROP_IMAGES_CONFIG', {})
 CONFIG = CONFIG_DEFAULTS.copy()
 CONFIG.update(USER_CONFIG)
 
-PATCH_SETTINGS = getattr(settings, 'DROP_IMAGES_PATCH_SETTINGS', True)
-
 
 # The following functions can monkey-patch settings automatically. Several
 # imports are placed inside functions to make it safe to import this module.
@@ -35,7 +33,7 @@ def patch_root_urlconf():
     from django.core.urlresolvers import clear_url_caches, reverse, NoReverseMatch
     import django_dropimages
     try:
-        reverse('djdropimages:render_dropzone')
+        reverse('djdropimages:upload')
     except NoReverseMatch:
         urlconf_module = import_module(settings.ROOT_URLCONF)
         urlconf_module.urlpatterns = [
@@ -45,4 +43,5 @@ def patch_root_urlconf():
 
 
 def patch_all():
-    patch_root_urlconf()
+    pass
+    #patch_root_urlconf()  # copied from django debug toolbar but seems to not work in some cases #todo

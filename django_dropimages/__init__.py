@@ -13,7 +13,7 @@ except Exception:
 # Code that discovers files or modules in INSTALLED_APPS imports this module.
 # Reference URLpatterns with a string to avoid the risk of circular imports.
 
-urls = 'django_dropimages.urls', 'djdropimages', 'djdropimages'
+urls = 'django_dropimages.dropimagesurls', 'djdropimages', 'djdropimages'
 
 
 default_app_config = 'django_dropimages.apps.DropImagesConfig'

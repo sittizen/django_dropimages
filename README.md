@@ -11,6 +11,8 @@ Install from PyPI with `pip`:
 ## Documentation
 Add 'django_dropimages' to the list of installed apps.
 
+Add `url(r'^__dropimages__/', include(django_dropimages.urls)),` to your urls.py
+
 Add `{% load drop_images %}` at the start of the template, `{% drop_images_js %}` where the javascripts are loaded, 
 and `{% drop_images  %}` where you want the dropzone to show.
 

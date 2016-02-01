@@ -11,5 +11,4 @@ class DropImagesConfig(AppConfig):
     verbose_name = _("Django DropImages")
 
     def ready(self):
-        if di_settings.PATCH_SETTINGS:
-            di_settings.patch_all()
+        di_settings.patch_all()
