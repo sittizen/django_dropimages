@@ -14,8 +14,10 @@ CONFIG_DEFAULTS = {
     'UPLOAD_URL': None,
     'DELETE_URL': None,
 
+    'DROPIMAGEGALLERY_MODEL': None,
     'DROPIMAGE_MODEL': None,
     'DROPIMAGE_FIELD': None,
+    'DROPIMAGEOWNER_FIELD': None,
 }
 
 USER_CONFIG = getattr(settings, 'DROP_IMAGES_CONFIG', {})

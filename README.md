@@ -37,7 +37,8 @@ Provides a setting dictionary that you can add in your project’s settings modu
 
     Specify the id of a select field to be filled with the `DropimagesGallery` Django instance pk once the upload is 
     complete, useful to integrate the dropzone into another modelform or wizard (see the examples).
-    
+
+
 + `UPLOAD_URL`
 
     Overrides the url where file data is POSTed, so you can use your own view to save the data.
